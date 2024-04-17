@@ -30,32 +30,21 @@ public class OpenTableTest {
     private WebDriverWait wait;
     public final int IMPLICIT_WAIT_TIME = 10;
     public final int PAGE_LOAD_TIME = 5;
-    
-    // Local Driver
-    @BeforeMethod
-    public WebDriver beforeMethod() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-		driver.get("https://www.opentable.com");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		return driver;
-        
-    }
-    // Portal Drivers
-    // @BeforeMethod
-    // public WebDriver beforeMethod() throws MalformedURLException {
-    // ChromeOptions chromeOptions = new ChromeOptions();
-    // driver = new RemoteWebDriver(new URL("http://localhost:4444/"),
-    // chromeOptions);
-    // driver.get("https://www.opentable.com");
-    // driver.manage().window().maximize();
-    // wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-    // WebDriverListener listener = new EventHandler();
-    // driver = new EventFiringDecorator<>(listener).decorate(driver);
-    // return driver;
 
-    // }
+
+    @BeforeMethod
+    public WebDriver beforeMethod() throws MalformedURLException {
+    ChromeOptions chromeOptions = new ChromeOptions();
+    driver = new RemoteWebDriver(new URL("http://localhost:4444/"),
+    chromeOptions);
+    driver.get("https://www.opentable.com");
+    driver.manage().window().maximize();
+    wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    WebDriverListener listener = new EventHandler();
+    driver = new EventFiringDecorator<>(listener).decorate(driver);
+    return driver;
+
+    }
     @Test
     public void opent() throws InterruptedException {
         Thread.sleep(10000);
